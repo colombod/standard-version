@@ -2,6 +2,136 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/colombod/standard-version/compare/v4.2.0...v5.0.0) (2026-06-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* NodeJS@8 is no longer supported. ([#612](https://github.com/colombod/standard-version/issues/612))
+* `composer.json` and `composer.lock` will no longer be read from or bumped by default. If you need to obtain a version or write a version to these files, please use `bumpFiles` and/or `packageFiles` options accordingly.
+* we were accepting .version.json as a config file, rather than .versionrc.json
+* we now bump the minor rather than major if version < 1.0.0; --release-as can be used to bump to 1.0.0.
+* tests are no longer run for Node 6
+* we now use the conventionalcommits preset by default, which directly tracks conventionalcommits.org.
+* if no package.json, bower.json, etc., is found, we now fallback to git tags
+* removed Node 4/5 from testing matrix
+
+### Features
+
+* add --lerna-package flag used to extract tags in case of lerna repo ([#503](https://github.com/colombod/standard-version/issues/503)) ([f579ff0](https://github.com/colombod/standard-version/commit/f579ff08f386aaae022a395ed0dbec9af77a5d49))
+* add .cjs config file ([#717](https://github.com/colombod/standard-version/issues/717)) ([eceaedf](https://github.com/colombod/standard-version/commit/eceaedf8b3cdeb282ee06bfa9c65503f42404858))
+* add prerelease lifecycle script hook (closes [#217](https://github.com/colombod/standard-version/issues/217)) ([#234](https://github.com/colombod/standard-version/issues/234)) ([ba4e7f6](https://github.com/colombod/standard-version/commit/ba4e7f61204a91a07f9257eed3913c20edc7fbf5))
+* adds configurable conventionalcommits preset ([#323](https://github.com/colombod/standard-version/issues/323)) ([4fcd4a7](https://github.com/colombod/standard-version/commit/4fcd4a7edabbfe4183fbaa7fcd0f55b2441449d1))
+* Adds support for `header` (--header) configuration based on the spec. ([#364](https://github.com/colombod/standard-version/issues/364)) ([ba80a0c](https://github.com/colombod/standard-version/commit/ba80a0c27029f54c751fe845560504925b45eab8))
+* adds support for bumping for composer versions ([#262](https://github.com/colombod/standard-version/issues/262)) ([fee872f](https://github.com/colombod/standard-version/commit/fee872f4e44a6f975ce93b2d670a671bcdf542a2))
+* allow a user to provide a custom changelog header ([#335](https://github.com/colombod/standard-version/issues/335)) ([1c51064](https://github.com/colombod/standard-version/commit/1c5106477a052f224771b0a61405d279b611608c))
+* allows seperate prefixTag version sequences ([#573](https://github.com/colombod/standard-version/issues/573)) ([3bbba02](https://github.com/colombod/standard-version/commit/3bbba025057ba40c3e15880fede2af851841165b))
+* bump minor rather than major, if release is &lt; 1.0.0 ([#347](https://github.com/colombod/standard-version/issues/347)) ([5d972cf](https://github.com/colombod/standard-version/commit/5d972cf1fede448001e30283e3258d07bed41658))
+* cli application accept path/preset option ([#279](https://github.com/colombod/standard-version/issues/279)) ([69c62cf](https://github.com/colombod/standard-version/commit/69c62cfbddea7ce5e9b307f5167e20aee63a87da))
+* **configuration:** .versionrc.js files are now supported ([#378](https://github.com/colombod/standard-version/issues/378)) ([ddc5c00](https://github.com/colombod/standard-version/commit/ddc5c0016271a7595df1a1cd9c6ea1c414b18139))
+* custom 'bumpFiles' and 'packageFiles' support ([#372](https://github.com/colombod/standard-version/issues/372)) ([564d948](https://github.com/colombod/standard-version/commit/564d9482a459d5d7a2020c2972b4d39167ded4bf))
+* **deprecated:** add deprecation message ([#907](https://github.com/colombod/standard-version/issues/907)) ([61b41fa](https://github.com/colombod/standard-version/commit/61b41fa47ef690f55b92e2edb82fe554e3c1e13a))
+* do not update/commit files in .gitignore ([#230](https://github.com/colombod/standard-version/issues/230)) ([4fd3bc2](https://github.com/colombod/standard-version/commit/4fd3bc21d5127e438c17f751b64714e84ff4f80d))
+* fallback to tags if no meta-information file found ([#275](https://github.com/colombod/standard-version/issues/275)) ([844cde6](https://github.com/colombod/standard-version/commit/844cde69658c59051183aa86c6dd85a5c059e55c))
+* **format-commit-message:** support multiple %s in the message ([45fcad5](https://github.com/colombod/standard-version/commit/45fcad547e9034d55b257bbd362054847eac41cd))
+* manifest.json support ([#236](https://github.com/colombod/standard-version/issues/236)) ([371d992](https://github.com/colombod/standard-version/commit/371d99290164cf16dd0aa26d094215d49688f54f))
+* preserve formatting when writing to package.json ([#282](https://github.com/colombod/standard-version/issues/282)) ([96216da](https://github.com/colombod/standard-version/commit/96216da5f7a9a8cb02b67d9478a1f20e513f9859))
+* publish only if commit+push succeed ([#229](https://github.com/colombod/standard-version/issues/229)) ([c5e1ee2](https://github.com/colombod/standard-version/commit/c5e1ee2a63a3488484f5392a5180cf97026f948d))
+* suggest branch name other than master ([#331](https://github.com/colombod/standard-version/issues/331)) ([304b49a](https://github.com/colombod/standard-version/commit/304b49a7ffdf3adf8fc3e3234e11455b05062c2a))
+* support custom updater as object as well as path ([#630](https://github.com/colombod/standard-version/issues/630)) ([55bbde8](https://github.com/colombod/standard-version/commit/55bbde8476013de7a2f24bf29c7c12cb07f96e3f))
+* update commit msg for when using commitAll ([#320](https://github.com/colombod/standard-version/issues/320)) ([74a040a](https://github.com/colombod/standard-version/commit/74a040a517e489111709c5acd7826543ad814af0))
+
+
+### Bug Fixes
+
+* adds support for `releaseCommitMessageFormat` ([#351](https://github.com/colombod/standard-version/issues/351)) ([a7133cc](https://github.com/colombod/standard-version/commit/a7133cc0e5a1924793bdf0e4abdd0ad9c58dfc2d))
+* always pass version to changelog context ([#327](https://github.com/colombod/standard-version/issues/327)) ([00e3381](https://github.com/colombod/standard-version/commit/00e338159e2158b23a58a4da9e95c5f5075257aa))
+* bin now enforces Node.js &gt; 4 ([#274](https://github.com/colombod/standard-version/issues/274)) ([e1b5780](https://github.com/colombod/standard-version/commit/e1b57809ef8c65ef50205bc81348098cfd514606))
+* **bump:** transmit tag prefix argument to conventionalRecommendedBump ([#393](https://github.com/colombod/standard-version/issues/393)) ([8205222](https://github.com/colombod/standard-version/commit/8205222150e0451dc4e20d0beef33802b873467a))
+* **cli:** display only one, correct default for --preset flag ([#377](https://github.com/colombod/standard-version/issues/377)) ([d17fc81](https://github.com/colombod/standard-version/commit/d17fc8103ac37887456483c29ef28f6ccd2519d1))
+* Commit message and tag name is no longer enclosed in quotes. ([#619](https://github.com/colombod/standard-version/issues/619)) ([ae032bf](https://github.com/colombod/standard-version/commit/ae032bfa9268a0a14351b0d78b6deedee7891e3a))
+* **commit:** don't try to process and add changelog if skipped ([#318](https://github.com/colombod/standard-version/issues/318)) ([3e4fdec](https://github.com/colombod/standard-version/commit/3e4fdecdb8e30b3e59c8682be64b7c18d3ff4175))
+* composer.json and composer.lock have been removed from default package and bump files. ([c934f3a](https://github.com/colombod/standard-version/commit/c934f3a38da4e7234d9dba3b2405f3b7e4dc5aa8))
+* **deps:** update dependency conventional-changelog to v3.1.12 ([#463](https://github.com/colombod/standard-version/issues/463)) ([f04161a](https://github.com/colombod/standard-version/commit/f04161ae624705e68f9018d563e9f3c09ccf6f30))
+* **deps:** update dependency conventional-changelog to v3.1.15 ([#479](https://github.com/colombod/standard-version/issues/479)) ([492e721](https://github.com/colombod/standard-version/commit/492e72192ebf35d7c58c00526b1e6bd2abac7f13))
+* **deps:** update dependency conventional-changelog to v3.1.18 ([#510](https://github.com/colombod/standard-version/issues/510)) ([e6aeb77](https://github.com/colombod/standard-version/commit/e6aeb779fe53ffed2a252e6cfd69cfcb786b9ef9))
+* **deps:** update dependency conventional-changelog to v3.1.21 ([#586](https://github.com/colombod/standard-version/issues/586)) ([fd456c9](https://github.com/colombod/standard-version/commit/fd456c995f3f88497fbb912fb8aabb8a42d97dbb))
+* **deps:** update dependency conventional-changelog to v3.1.23 ([#652](https://github.com/colombod/standard-version/issues/652)) ([00dd3c0](https://github.com/colombod/standard-version/commit/00dd3c01aab20d28a8bbd1e174e416d6c2b34d90))
+* **deps:** update dependency conventional-changelog to v3.1.24 ([#677](https://github.com/colombod/standard-version/issues/677)) ([cc45036](https://github.com/colombod/standard-version/commit/cc45036d9960b6d83e0e850ccbbe8e8098d36ae6))
+* **deps:** update dependency conventional-changelog to v3.1.25 ([#865](https://github.com/colombod/standard-version/issues/865)) ([4c938a2](https://github.com/colombod/standard-version/commit/4c938a2baac11385d655144429bc73b2199bb027))
+* **deps:** update dependency conventional-changelog-config-spec to v2 ([#352](https://github.com/colombod/standard-version/issues/352)) ([f586844](https://github.com/colombod/standard-version/commit/f586844d7952937a3d13f6974c84b73b3354f743))
+* **deps:** update dependency conventional-changelog-config-spec to v2.1.0 ([#442](https://github.com/colombod/standard-version/issues/442)) ([a2c5747](https://github.com/colombod/standard-version/commit/a2c574735ac5a165a190661b7735ea284bdc7dda))
+* **deps:** update dependency conventional-changelog-conventionalcommits to v4.2.3 ([#496](https://github.com/colombod/standard-version/issues/496)) ([bc606f8](https://github.com/colombod/standard-version/commit/bc606f8e96bcef1d46b28305622fc76dfbf306cf))
+* **deps:** update dependency conventional-changelog-conventionalcommits to v4.3.0 ([#587](https://github.com/colombod/standard-version/issues/587)) ([b3b5eed](https://github.com/colombod/standard-version/commit/b3b5eedea3eaf062d74d1004a55a0a6b1e3ca6c6))
+* **deps:** update dependency conventional-changelog-conventionalcommits to v4.4.0 ([#650](https://github.com/colombod/standard-version/issues/650)) ([9f201a6](https://github.com/colombod/standard-version/commit/9f201a61bb50ec12053a04faccfaea20e44d6ff2))
+* **deps:** update dependency conventional-changelog-conventionalcommits to v4.5.0 ([#678](https://github.com/colombod/standard-version/issues/678)) ([6317d36](https://github.com/colombod/standard-version/commit/6317d36130767cfd85114ab9033a6f1ef110388d))
+* **deps:** update dependency conventional-changelog-conventionalcommits to v4.6.1 ([#752](https://github.com/colombod/standard-version/issues/752)) ([bb8869d](https://github.com/colombod/standard-version/commit/bb8869de7d8bcace1ec92f29e389e7fab506d64e))
+* **deps:** update dependency conventional-changelog-conventionalcommits to v4.6.3 ([#866](https://github.com/colombod/standard-version/issues/866)) ([6c75ed0](https://github.com/colombod/standard-version/commit/6c75ed0b1456913ae7e4d6fe8532fb4106df1bdf))
+* **deps:** update dependency conventional-recommended-bump to v6 ([#417](https://github.com/colombod/standard-version/issues/417)) ([4c5cad1](https://github.com/colombod/standard-version/commit/4c5cad133aa30de941e9a6bd9120644fd3bdecc2))
+* **deps:** update dependency conventional-recommended-bump to v6.0.10 ([#653](https://github.com/colombod/standard-version/issues/653)) ([c360d6a](https://github.com/colombod/standard-version/commit/c360d6a307909c6e571b29d4a329fd786b4d4543))
+* **deps:** update dependency conventional-recommended-bump to v6.0.11 ([#679](https://github.com/colombod/standard-version/issues/679)) ([360789a](https://github.com/colombod/standard-version/commit/360789ab84957a67d3919cb28db1882cb68296fc))
+* **deps:** update dependency conventional-recommended-bump to v6.0.2 ([#462](https://github.com/colombod/standard-version/issues/462)) ([84bb581](https://github.com/colombod/standard-version/commit/84bb581209b50357761cbec45bb8253f6a182801))
+* **deps:** update dependency conventional-recommended-bump to v6.0.5 ([#480](https://github.com/colombod/standard-version/issues/480)) ([1e1e215](https://github.com/colombod/standard-version/commit/1e1e215a633963188cdb02be1316b5506e3b99b7))
+* **deps:** update dependency conventional-recommended-bump to v6.0.9 ([#588](https://github.com/colombod/standard-version/issues/588)) ([d4d2ac2](https://github.com/colombod/standard-version/commit/d4d2ac2a99c095227118da795e1c9e19d06c9a0a))
+* **deps:** update dependency conventional-recommended-bump to v6.1.0 ([#695](https://github.com/colombod/standard-version/issues/695)) ([65dd070](https://github.com/colombod/standard-version/commit/65dd070b9f01ffe1764e64ba739bc064b84f4129))
+* **deps:** update dependency detect-indent to v6 ([#341](https://github.com/colombod/standard-version/issues/341)) ([234d9dd](https://github.com/colombod/standard-version/commit/234d9dde80eb1e99795631e65ee27cd3302a6133))
+* **deps:** update dependency detect-newline to v3 ([#342](https://github.com/colombod/standard-version/issues/342)) ([02a6093](https://github.com/colombod/standard-version/commit/02a609395ca4d26b7cc966552a6e2405359893b6))
+* **deps:** update dependency detect-newline to v3.1.0 ([#482](https://github.com/colombod/standard-version/issues/482)) ([04ab36a](https://github.com/colombod/standard-version/commit/04ab36a12be58915cfa9c60771890e074d1f5685))
+* **deps:** update dependency figures to v3 ([#343](https://github.com/colombod/standard-version/issues/343)) ([7208ded](https://github.com/colombod/standard-version/commit/7208dedeb2b701fdcb9c59ec5f2b4872306108a2))
+* **deps:** update dependency figures to v3.1.0 ([#468](https://github.com/colombod/standard-version/issues/468)) ([63300a9](https://github.com/colombod/standard-version/commit/63300a935c0079fd03e8e1acc55fd5b1dcea677f))
+* **deps:** update dependency find-up to v4 ([#355](https://github.com/colombod/standard-version/issues/355)) ([73b35f8](https://github.com/colombod/standard-version/commit/73b35f8c9086209109d3a5cee79a9c48b6da7ba0))
+* **deps:** update dependency find-up to v4.1.0 ([#383](https://github.com/colombod/standard-version/issues/383)) ([b621a4a](https://github.com/colombod/standard-version/commit/b621a4a448244715926d9a05b2486632ee16bafb))
+* **deps:** update dependency find-up to v5 ([#651](https://github.com/colombod/standard-version/issues/651)) ([df8db83](https://github.com/colombod/standard-version/commit/df8db832327a751d5c62fe361b6ac2d2b5f66bf6))
+* **deps:** update dependency git-semver-tags to v3 ([#418](https://github.com/colombod/standard-version/issues/418)) ([1ce3f4a](https://github.com/colombod/standard-version/commit/1ce3f4afa9bc2520e50982773cbf4b041cdc157f))
+* **deps:** update dependency git-semver-tags to v3.0.1 ([#485](https://github.com/colombod/standard-version/issues/485)) ([9cc188c](https://github.com/colombod/standard-version/commit/9cc188cbb84ee3ae80d5e66f5c54727877313b14))
+* **deps:** update dependency git-semver-tags to v4 ([#589](https://github.com/colombod/standard-version/issues/589)) ([a0f0e81](https://github.com/colombod/standard-version/commit/a0f0e813b2be4a2065600a19075fda4d6f331ef8))
+* **deps:** update dependency semver to v6 ([#344](https://github.com/colombod/standard-version/issues/344)) ([c40487a](https://github.com/colombod/standard-version/commit/c40487a4100b5d3f85fae2eeb1cbff91056cd11d))
+* **deps:** update dependency semver to v6.3.0 ([#366](https://github.com/colombod/standard-version/issues/366)) ([cd866c7](https://github.com/colombod/standard-version/commit/cd866c7ae6818fa7f19e61e0bbb10db90036e9b7))
+* **deps:** update dependency stringify-package to v1.0.1 ([#459](https://github.com/colombod/standard-version/issues/459)) ([e06a835](https://github.com/colombod/standard-version/commit/e06a835c8296a92f4fa7c07f98057d765c1a91e5))
+* **deps:** update dependency yargs to v13 ([#345](https://github.com/colombod/standard-version/issues/345)) ([b2c8e59](https://github.com/colombod/standard-version/commit/b2c8e59087b3aac957b8c1f79fa1087764f9811b))
+* **deps:** update dependency yargs to v13.2.4 ([#356](https://github.com/colombod/standard-version/issues/356)) ([00b2ce6](https://github.com/colombod/standard-version/commit/00b2ce6d7af33a66ff3bfc5f76cdf1d43ce934b3))
+* **deps:** update dependency yargs to v13.3.0 ([#401](https://github.com/colombod/standard-version/issues/401)) ([3d0e8c7](https://github.com/colombod/standard-version/commit/3d0e8c7e33dc51d13aea43ee0fdb915f1961fcc8))
+* **deps:** update dependency yargs to v14 ([#440](https://github.com/colombod/standard-version/issues/440)) ([fe37e73](https://github.com/colombod/standard-version/commit/fe37e7390760d8d16d1b94ca58d8123e292c46a8))
+* **deps:** update dependency yargs to v14.2.0 ([#461](https://github.com/colombod/standard-version/issues/461)) ([fb21851](https://github.com/colombod/standard-version/commit/fb2185107a90ba4b9dc7c9c1d873ed1283706ac1))
+* **deps:** update dependency yargs to v14.2.1 ([#483](https://github.com/colombod/standard-version/issues/483)) ([dc1fa61](https://github.com/colombod/standard-version/commit/dc1fa6170ffe12d4f8b44b70d23688a64d2ad0fb))
+* **deps:** update dependency yargs to v14.2.2 ([#488](https://github.com/colombod/standard-version/issues/488)) ([ecf26b6](https://github.com/colombod/standard-version/commit/ecf26b6fc9421a78fb81793c4a932f579f7e9d4a))
+* **deps:** update dependency yargs to v15 ([#484](https://github.com/colombod/standard-version/issues/484)) ([35b90c3](https://github.com/colombod/standard-version/commit/35b90c3f24cfb8237e94482fd20997900569193e))
+* **deps:** update dependency yargs to v15.1.0 ([#518](https://github.com/colombod/standard-version/issues/518)) ([8f36f9e](https://github.com/colombod/standard-version/commit/8f36f9e073119fcbf5ad843237fb06a4ca42a0f9))
+* **deps:** update dependency yargs to v15.3.1 ([#559](https://github.com/colombod/standard-version/issues/559)) ([d98cd46](https://github.com/colombod/standard-version/commit/d98cd4674b4d074c0b7f4d50d052ae618cf494c6))
+* **deps:** update dependency yargs to v16 ([#660](https://github.com/colombod/standard-version/issues/660)) ([f6a7430](https://github.com/colombod/standard-version/commit/f6a7430329919874e1e744ac5dca2f83bba355df))
+* don't pass args to git rev-parse ([1ac72f7](https://github.com/colombod/standard-version/commit/1ac72f74fe447121c0096915955732f7d84b5dc3))
+* Ensures provided `packageFiles` arguments are merged with `bumpFiles` when no `bumpFiles` argument is specified (default). ([#534](https://github.com/colombod/standard-version/issues/534)) ([2785023](https://github.com/colombod/standard-version/commit/2785023c91668e7300e6a22e55d31b6bd9dae59b)), closes [#533](https://github.com/colombod/standard-version/issues/533)
+* make pattern for finding CHANGELOG sections work for non anchors ([#292](https://github.com/colombod/standard-version/issues/292)) ([b684c78](https://github.com/colombod/standard-version/commit/b684c784c8986226889feb1524bc029b913c9571))
+* no --tag prerelease for private module ([#296](https://github.com/colombod/standard-version/issues/296)) ([27e2ab4](https://github.com/colombod/standard-version/commit/27e2ab422c94c633affa652c07bb04d49484f04e)), closes [#294](https://github.com/colombod/standard-version/issues/294)
+* prevent duplicate headers from being added ([#305](https://github.com/colombod/standard-version/issues/305)) ([#307](https://github.com/colombod/standard-version/issues/307)) ([db2c6e5](https://github.com/colombod/standard-version/commit/db2c6e5459a01f005c09e39900bae0ff93400534))
+* recommend `--tag` prerelease for npm publish of prereleases ([#196](https://github.com/colombod/standard-version/issues/196)) ([709dae1](https://github.com/colombod/standard-version/commit/709dae168069930e38b18d8ed0fb07addc9540b6)), closes [#183](https://github.com/colombod/standard-version/issues/183)
+* show correct pre-release tag in help output ([#259](https://github.com/colombod/standard-version/issues/259)) ([d90154a](https://github.com/colombod/standard-version/commit/d90154a82b78d4ede26cf043c1d04ff9da2ad35c))
+* show full tag name in checkpoint ([#241](https://github.com/colombod/standard-version/issues/241)) ([b4ed4f9](https://github.com/colombod/standard-version/commit/b4ed4f9ba9a905c4d36804f6e42e07d510499543))
+* stop suggesting npm publish if package.json was not updated ([#319](https://github.com/colombod/standard-version/issues/319)) ([a5ac845](https://github.com/colombod/standard-version/commit/a5ac84545a51ce8eb5ea2db0cf06fb8b39188e82))
+* update config file name in command based on README.md ([#357](https://github.com/colombod/standard-version/issues/357)) ([ce44dd2](https://github.com/colombod/standard-version/commit/ce44dd26deb6d6b0335cd6be2995bf7d2cc8d72a))
+* **updater:** npm7 package lock's inner version not being updated ([#713](https://github.com/colombod/standard-version/issues/713)) ([a316dd0](https://github.com/colombod/standard-version/commit/a316dd02f5a7d8dee33d99370afda8738985bc10))
+* Updates package.json to _actual_ supported (tested) NodeJS versions. ([#379](https://github.com/colombod/standard-version/issues/379)) ([15eec8a](https://github.com/colombod/standard-version/commit/15eec8a1143dbd99e6d1b80a856cd4859fa13480))
+* use require.resolve for the default preset ([#465](https://github.com/colombod/standard-version/issues/465)) ([d557372](https://github.com/colombod/standard-version/commit/d55737239530f5eee684e9cbf959f7238d609fd4))
+* use tagPrefix in CHANGELOG lifecycle step ([#243](https://github.com/colombod/standard-version/issues/243)) ([a56c7ac](https://github.com/colombod/standard-version/commit/a56c7ac78f9d7f6b4fb043d135b5e3d9ada89c70))
+* use the `skip` default value for skip cli arg ([#211](https://github.com/colombod/standard-version/issues/211)) ([3fdd7fa](https://github.com/colombod/standard-version/commit/3fdd7fa22fa40f2e9f899aac24493f391e72a074))
+* Vulnerability Report GHSL-2020-11101 ([9d978ac](https://github.com/colombod/standard-version/commit/9d978ac9d4f64be4c7b9d514712ab3757732d561))
+
+
+### Reverts
+
+* "chore(deps): bump conventional-changelog to v3.1.17" ([00512d0](https://github.com/colombod/standard-version/commit/00512d08eb3197d7b20a2f09894ed1a6ae4af272))
+
+
+### Miscellaneous Chores
+
+* update testing matrix ([1d46627](https://github.com/colombod/standard-version/commit/1d466275518ae2649758b9e0e9b3c848734f534f))
+
+
+### Build System
+
+* drop Node 6 from testing matrix ([#346](https://github.com/colombod/standard-version/issues/346)) ([6718428](https://github.com/colombod/standard-version/commit/671842853b9fa62ecda126bf5e1fbe7aa60a5d1f))
+* NodeJS@8 is no longer supported. ([#612](https://github.com/colombod/standard-version/issues/612)) ([05edef2](https://github.com/colombod/standard-version/commit/05edef2de79d8d4939a6e699ce0979ff8da12de9))
+
 ## [9.5.0](https://github.com/conventional-changelog/standard-version/compare/v9.4.0...v9.5.0) (2022-05-15)
 
 
